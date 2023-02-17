@@ -16,7 +16,7 @@ def retrieveCast(url) :
             soup = BeautifulSoup(page.content, "html.parser")
             name = soup.find("h3", {"itemprop":"name"}).text
             name = re.sub("\s\s+", " ", name).strip("\n")
-            print("Scraping cast list from: %s" % name)
+            print("Scraping cast list from: %s\n" % name)
                 # check if there is a cast list for the url
             if str(soup.find("div", {"no_content":"list"})) != "None":
                 raise Exception("No cast list for this film")
@@ -28,15 +28,15 @@ def retrieveCast(url) :
                 print(soup.find('table', {"class":"cast_list"}))
             return(cast_list)
         else:
-            print("Status code %i, can't connect to: %s" % (page.status_code, url))
+            print("Status code %i, can't connect to: %s\n" % (page.status_code, url))
             if page.status_code == 404:
-                print("Can't retrieve page: status code %i" % page.status_code)
+                print("Can't retrieve page: status code %i\n" % page.status_code)
             else:
                 print("Retrying")
                 time.sleep(random.randint(1, 6))
                 retrieveCast(url)
     except (KeyError, NameError, TypeError, AttributeError, IndexError) as e:
-        print("Error: Can't retrieve cast list (%s)" % e)
+        print("Error: Can't retrieve cast list (%s)\n" % e)
 
 
 
