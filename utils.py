@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import time
 import random
+from matplotlib import pylab
 
 
 
@@ -93,5 +94,22 @@ def getURLs():
     return(sample_urls)
 
 
+# define function to create network image
+def save_graph(graph,file_name):
+    # initialze Figure
+    plt.figure(num=None, figsize=(1000, 700), dpi=80)
+    plt.axis('off')
+    fig = plt.figure(1)
+    pos = nx.spring_layout(graph)
+    nx.draw_networkx_edges(graph, pos, edge_color = "white")
+    nx.draw_networkx_labels(graph, pos)
 
+    cut = 1.00
+    xmax = cut * max(xx for xx, yy in pos.values())
+    ymax = cut * max(yy for xx, yy in pos.values())
+    plt.xlim(0, xmax)
+    plt.ylim(0, ymax)
 
+    plt.savefig(file_name, bbox_inches="tight")
+    pylab.close()
+    del fig
