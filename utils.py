@@ -6,7 +6,8 @@ import numpy as np
 import time
 import random
 from matplotlib import pylab
-
+import matplotlib.pyplot as plt
+import networkx as nx
 
 
 # define function to retieve actors
@@ -40,7 +41,6 @@ def retrieveCast(url) :
         print("Error: Can't retrieve cast list (%s)\n" % e)
 
 
-
 # define function to update actor_table
 def filterList(actor_list):
     add_rows = []
@@ -62,13 +62,11 @@ def filterList(actor_list):
         print("Error: Can't retrieve actor table (%s)" % e)
 
 
-
 # define combined function to retrieve actors and table
 def combinedRetrieve(url, dataframes):
     cast_list = retrieveCast(url)
     new_rows = filterList(cast_list)
     dataframes.append(new_rows)
-
 
 
 # define function to retrieve sample urls with a number input
